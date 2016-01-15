@@ -66,10 +66,22 @@ function llistarusuaris()
 
 
 function crearnouusuari($nick, $nomcognoms, $edat, $mail, $pwd, $nivell)
-{
-	//afegir codi per crear usuaris
-		echo " Nou usuari creat:".$nick;
+{	
+	global $CFG;
+	$mysqli = new mysqli($CFG->dbhost,$CFG->dbuser,$CFG->dbpass,$CFG->dbname);
+	//afegir codi per crear usuaris	
+	$sql="insert into usuaris (nick, nomcognoms, contrasenya, mail, edat, nivell) values
+	('".$nick."', '".$nomcognoms."', '".$pwd."', '".$mail."', '".$edat."', '".$nivell."')" ;
+	if ( ! $result = $mysqli->query($sql) ) {
+		echo "No s'ha pogut realitzar la inserció";
+		echo mysqli_error();
+		exit;
+	}
+	else {
+		echo " Nou usuari creat: ".$nick;
 		echo "<p><a href='index.php?operacio=llistar_usuaris'>Tornar</a>";
+	}
+	mysqli_close($mysqli);
 }
 
 
