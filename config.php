@@ -14,8 +14,8 @@
 */
 
 	class cCFG {
-		public $dirroot="f:\\xampp2\\htdocs\\c5\\portalcss";
-		public $wwwroot="http://localhost/c5/portalcss";
+		public $dirroot="f:\\xampp2\\htdocs\\m9\\cmsfp";
+		public $wwwroot="http://localhost/m8/cmsfp";
 		public $dbhost="localhost";
 		public $dbname="portal";
 		public $dbuser="root";
