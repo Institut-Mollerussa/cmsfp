@@ -3,7 +3,7 @@
 // funcions amb operacions del portal
 
 
-include "config.php";
+include "sample.config.php";
 
 
 function connectar_bd()
