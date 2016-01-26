@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // CMS FP
 // dispatcher per operacions
 

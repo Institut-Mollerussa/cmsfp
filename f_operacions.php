@@ -43,26 +43,45 @@ function tancar_sessio()
 function llistarusuaris()
 {
 	global $CFG;
-	$conn=mysqli_connect($CFG->dbhost,$CFG->dbuser,$CFG->dbpass);
+	$conn=mysqli_connect($CFG->dbhost,$CFG->dbname,$CFG->dbuser,$CFG->dbpass);
+	$sql="
+	select * from usuaris;
+	";
+	if ( ! $result = $conn->query($sql) ) {
+	echo "No s'ha pogut realitzar la consulta";
+	echo mysqli_error();
+	exit;
+	}
 	// resta de query
 	
 	//afegir codi per llistar usuaris
 	echo '<a href="index.php?operacio=form_alta_usuari">Afegeix un usuari</a> | <a href="index.php">Tornar a l\'&agrave;rea principal</a><br><br>';
 	echo '<h2>Llistat usuaris del portal: </h2>';
 	echo '<table bgcolor="#C0D5BD" cellspacing=5 border="1" width="100%">';
-		echo '<tr class="tlu">';
-		echo '<td><strong>Pepe</strong></td>';
-		echo '<td>Perez</td>';
-		echo '<td>22</td>';
-		echo '<td>pperez@hotmail.com</td>';
-		echo '<td>10</td>';
-		echo '<td><a href="index.php?operacio=form_modificar_usuari&nick=pepe">modificar</a></td>';	
-		echo '<td><a href="index.php?operacio=op_eliminar_usuari&nick=pepe">eliminar</a></td>';
-		echo '</tr>';
+	echo '<tr class="tlu">';
+	echo "<tr>";
+	echo "<td><strong>Nom</strong></td><td><strong>Cognom</strong></td><td><strong>E-mail</strong></td><td><strong>Edat</strong></td><td><strong>Nivell</strong></td><td><strong>Modificar usuari</strong></td><td><strong>Eliminar usuari</strong></td>";
+	echo "</tr>";
+	while ( $row = $result->fetch_assoc() ){
+		echo "<tr>";
+		echo "<td>";
+		echo htmlentities($row['nick'])."<br></td>";
+		echo "<td>";
+		echo htmlentities($row['nomcognoms'])."<br></td>";
+		echo "<td>";
+		echo htmlentities($row['mail'])."<br></td>";
+		echo "<td>";
+		echo htmlentities($row['edat'])."<br></td>";
+		echo "<td>";
+		echo htmlentities($row['nivell'])."<br></td>";
+	}
+	echo '<td><a href="index.php?operacio=form_modificar_usuari&nick=pepe">modificar</a></td>';	
+	echo '<td><a href="index.php?operacio=op_eliminar_usuari&nick=pepe">eliminar</a></td>';
+	echo '</tr>';
 	echo '</table>';
 }
 
-
+//nick, nomcognoms,contrasenya,mail,edat,nivell
 
 
 function crearnouusuari($nick, $nomcognoms, $edat, $mail, $pwd, $nivell)
