@@ -86,6 +86,11 @@ if( isset($_REQUEST["operacio"]) && hiha_sessio() )
 	{
 		llistarnoticies();
 	}
+	else if( $operacio=="crearpagines")
+	{
+		crearpagines();
+	}
+
 	else if( $operacio=="eliminar_noticia" && isset($_REQUEST["b_noti"]))
 	{
 		$b = $_REQUEST["b_noti"];

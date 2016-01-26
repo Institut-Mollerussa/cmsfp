@@ -255,5 +255,11 @@ function borrarnoticia($codin)
 	mysqli_free_result($result);
 	mysqli_close($mysqli);
 }
+function crearpagines(){
+    $mysqli = new mysqli("localhost", "root", "", "portal");
 
+
+
+
+}
 ?>
