@@ -149,4 +149,41 @@ function modificarperfilusuari($nick, $nomcognoms, $edat, $mail, $pwd=0)
 	echo "<p><a href='index.php'>Tornar</a>";
 }
 
+function llistarnoticies(){
+	$mysqli = new mysqli("localhost", "root", "root", "portal");
+	$sql="select * from noticies";
+	if ( ! $result = $mysqli->query($sql) ) {
+		echo "No s'ha pogut realitzar la consulta";
+		echo mysqli_error();
+		exit;
+	}
+	echo "<a href='index.php'>Tornar a l\'&agrave;rea principal</a><br><br>";
+	echo "<h2>Llistat de noticies</h2>";
+	echo "<table width='70%' border='1'> <tr><td><b>Titol</b></td><td><b>Data</b></td><td><b>Tipus</b></td><td><b>Eliminar</b></td></tr>";
+	while ( $row = $result->fetch_assoc() ){
+		echo "<tr><td>".htmlentities($row['titol'])."</td><td>".htmlentities($row['data'])."</td><td>".htmlentities($row['tipus'])."</td>";
+        echo "<td><a href='index.php?operacio=eliminar_noticia&b_noti=".htmlentities($row['codin'])."'>Eliminar</a></td></tr>";
+	}
+	echo "</table>";
+	mysqli_free_result($result);
+	mysqli_close($mysqli);
+}
+
+function borrarnoticia($codin){
+	$mysqli = new mysqli("localhost", "root", "root", "portal");
+	$sql="DELETE FROM noticies WHERE codin='".$codin."'" ;
+	if ( ! $result = $mysqli->query($sql) ) {
+		echo "No s'ha pogut eliminar la noticia.";
+		echo mysqli_error();
+		exit;
+	}
+	else {
+		echo "<a href='index.php'>Tornar a l\'&agrave;rea principal</a><br><br>";
+		echo "Noticia ".$codin." eliminada.";
+		header('Location: index.php?operacio=llistar_noticies');
+	}
+	mysqli_free_result($result);
+	mysqli_close($mysqli);
+}
+
 ?>
