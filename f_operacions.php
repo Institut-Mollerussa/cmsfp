@@ -98,36 +98,59 @@ function eliminarusuari($nick)
 
 
 
-function formularimodificarusuari($nick)
+function formularimodificarusuari($nick) //Xavi
 {
 	//afegir codi per modificar usuaris
-	echo '<h2>Modificar usuari</h2>
-	<form name="form1" method="POST" action="index.php">
-	<table bgcolor="#C0D5BD" cellpadding="5" cellspacing="2" border="1">
-		<tr><td> Nom i cognoms :</td> <td><input name="nomcognoms" type="text" value="nomcognoms"></td></tr>
-		<tr><td> Edat :</td> <td> <input name="edat" type="text" value="edat"></td></tr> 
-		<tr><td> Correu electr&oacute;nic :</td> <td> <input name="mail" type="text" value="mail"></td></tr> 
-		<tr><td> Usuari acc&eacute;s:</td><td>nick</td></tr> 
-		<tr><td> Contrasenya :</td> <td> <input name="contrasenya" type="password"></td></tr> 
-		<tr><td> Nivell :</td> <td> <input name="nivell" type="text" value="nivell"></td></tr> 
-		<tr><td colspan="2" align="center"><input type="submit" value="Modificar"></td></tr>
-	</table>
-	<input name="nick" type="hidden" value="nick"> 
-	<input name="operacio" type="hidden" value="op_modificar_usuari">
-	</form>
-	<p><a href="index.php?operacio=llistar_usuaris">Tornar &agrave;rea gesti&oacute;</a>
-	<p><a href="index.php">Plana principal</a>';
+	global $CFG;
+	$mysqli = new mysqli($CFG->dbhost,$CFG->dbuser,$CFG->dbpass,$CFG->dbname);
+	$sql="Select * from usuaris where nick='" .$nick ."'";
+	if( ! $result = $mysqli->query($sql) ){
+		echo "No s'ha pogut realitzar la consulta";
+		echo mysqli_error();
+		exit;
+	}else{
+		if ($row = $result->fetch_assoc()){
+			echo '<h2>Modificar usuari</h2>
+					<form name="form1" method="POST" action="index.php">
+					<table bgcolor="#C0D5BD" cellpadding="5" cellspacing="2" border="1">
+						<tr><td> Nom i cognoms :</td> <td><input name="nomcognoms" type="text" value="'.$row["nomcognoms"].'"></td></tr>
+						<tr><td> Edat :</td> <td> <input name="edat" type="text" value="'.$row["edat"].'"></td></tr> 
+						<tr><td> Correu electr&oacute;nic :</td> <td> <input name="mail" type="text" value="'.$row["mail"].'"></td></tr> 
+						<tr><td> Usuari acc&eacute;s:</td><td>nick</td></tr> 
+						<tr><td> Contrasenya :</td> <td> <input name="contrasenya" type="password"></td></tr> 
+						<tr><td> Nivell :</td> <td> <input name="nivell" type="text" value="'.$row["nivell"].'"></td></tr> 
+						<tr><td colspan="2" align="center"><input type="submit" value="Modificar"></td></tr>
+					</table>
+					<input name="nick" type="hidden" value="'.$row["nick"].'"> 
+					<input name="operacio" type="hidden" value="op_modificar_usuari">
+					</form>
+					<p><a href="index.php?operacio=llistar_usuaris">Tornar &agrave;rea gesti&oacute;</a>
+					<p><a href="index.php">Plana principal</a>';
+		}else{
+			echo "No existeix cap usuari amb aquest nick:" .$nick. ".";
+		}
+	}
 }
 
 
 
 
 
-function modificarusuari($nick, $nomcognoms, $edat, $mail, $pwd, $nivell)
+function modificarusuari($nick, $nomcognoms, $edat, $mail, $pwd, $nivell) //Xavi
 {
 	//afegir codi per modificar usuaris
+	global $CFG;
+	$mysqli = new mysqli($CFG->dbhost,$CFG->dbuser,$CFG->dbpass,$CFG->dbname);
+	$sql="Update usuaris set nomcognoms='".$nomcognoms."', edat=".$edat.", mail='".$mail."', contrasenya='".$pwd."', nivell='".$nivell."' where nick='" .$nick ."'";
+	
+	if( ! $result = $mysqli->query($sql) ){
+		echo "No s'ha pogut realitzar l'actualització";
+		echo mysqli_error();
+		exit;
+	}else{
 		echo "Usuari modificat:".$nick;
 		echo "<p><a href='index.php?operacio=llistar_usuaris'>Tornar</a>";
+	}
 }
 
 
