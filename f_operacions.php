@@ -334,7 +334,8 @@ function eliminarpagina($head)
 	}
 	else {
 		echo " La seguent pagina ha estat eliminada: ".$head;
-		echo "<p><a href='index.php?operacio=llistar_pagines'>Tornar</a>";
+		echo "<a href='index.php'>Tornar inici</a>&nbsp&nbsp";
+		echo "<a href='index.php?operacio=llistar_pagines'>Enrera</a>";
 	}
 	mysqli_close($mysqli);
 	    
@@ -355,7 +356,8 @@ function modificarpagina($head,$body,$oldhead)
 	}
 	else{
 		echo "la seguent pagina ha estat modificada:".$head;
-echo "<p><a href='index.php'>Tornar</a>";
+	echo "<a href='index.php'>Tornar inici</a>&nbsp&nbsp";
+		echo "<a href='index.php?operacio=llistar_pagines'>Enrera</a>";
 	}
 
 }
@@ -370,7 +372,8 @@ function visualitzarpagina($head)
 		exit;
 	}
 	
-	echo "<a href='index.php'>Tornar al principi</a><br><br>";
+	echo "<a href='index.php'>Tornar inici</a>&nbsp&nbsp";
+		echo "<a href='index.php?operacio=llistar_pagines'>Enrera</a>";
 	echo "<h1>PAGINA VISUALITACIO</h1>";
 	?>
 	<div  id="header" style="font-size:300%;">  <h1> 
