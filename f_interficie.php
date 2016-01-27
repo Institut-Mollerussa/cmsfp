@@ -217,4 +217,23 @@ function formularicrearnovapagina(){
 
 <?php
 }
+
+function formularimodificarpagina($head){
+	
 ?>
+<h2> Formulari modificar una pagina </h2>
+<form name="form3" method="POST" action="index.php">
+<table bgcolor="#C0D5BD" cellpadding="5" cellspacing="2" border="1">
+<input name="oldhead" type="hidden" value="<?php echo $head; ?>">
+<tr><td> Head de la pagina:</td><td><input name="head" type="text"></td></tr>
+<tr><td> Body de la pagina</td><td><input name="body" type="text"></td></tr>
+<tr><td colspan="2" align="center"><input type="submit" value="Modificar Pagina"></td></tr>
+</table>
+<input name="operacio" type="hidden" value="op_modificar_pagina">
+</form>
+
+<?php
+}
+?>
+
+

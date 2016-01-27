@@ -70,26 +70,55 @@ if( isset($_REQUEST["operacio"]) && hiha_sessio() )
 		crearnovapagina($head,$body);
 	}
 	else if($operacio=="form_alta_pagina")
+		
 	{ 	
 		
 		formularicrearnovapagina();
 		}
+		
+	 else if($operacio=="op_visualitzar_pagina" && isset($_REQUEST["head"])){
+     
+	 $head=$_REQUEST["head"];
+	 
+	 visualitzarpagina($head);
+ }	
+ 
 	else if( $operacio=="llistar_pagines" )
 	{
 		
 		llistarpagines();
 	}
-	else if( $operacio=="form_alta_pagina" )
-	{
-		
-		formularicrearnovapagina();
-	}
+	
 	else if( $operacio=="op_eliminar_pagina" && isset($_REQUEST["head"]) )
 	{
 		
 		$head = $_REQUEST["head"];
 		eliminarpagina($head);
+		
 	}
+	else if( $operacio=="form_modificar_pagina" &&  isset($_REQUEST["head"]) )
+	{
+		
+		$head = $_REQUEST["head"];
+		
+		
+	
+		formularimodificarpagina($head);
+	}
+	else if( $operacio=="op_modificar_pagina" &&  isset($_REQUEST["head"]) && isset($_REQUEST["body"] )  && isset($_REQUEST["oldhead"] ))
+	{
+		
+		$head = $_REQUEST["head"];
+		$body=$_REQUEST["body"];
+		$oldhead = $_REQUEST["oldhead"];
+	
+		modificarpagina($head,$body,$oldhead);
+	}
+	
+	
+	
+	
+	
 	else if($operacio=="logout")
 	{
 		tancar_sessio();

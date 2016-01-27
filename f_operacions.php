@@ -341,6 +341,25 @@ function eliminarpagina($head)
 	    
 		
 }
+function modificarpagina($head,$body,$oldhead)
+{
+	global $CFG;
+	$mysqli = new mysqli($CFG->dbhost,$CFG->dbuser,$CFG->dbpass,$CFG->dbname);
+
+	
+		$sql="UPDATE pagines SET head='".$head."',body='".$body."' where head='".$oldhead."'";
+	
+	if ( ! $result = $mysqli->query($sql) ) {
+		echo "No s'ha pogut realitzar l'actualització";
+		echo mysqli_error();
+		exit;
+	}
+	else{
+		echo "la seguent pagina ha estat modificada:".$head;
+echo "<p><a href='index.php'>Tornar</a>";
+	}
+
+}
 
 
 
