@@ -61,6 +61,16 @@ if( isset($_REQUEST["operacio"]) && hiha_sessio() )
 		//llista en una taula els usuaris i ofereix les operacions pel CRUD
 		llistarusuaris();
 	}
+	else if( $operacio=="llistar_pagines" )
+	{
+		
+		llistarpagines();
+	}
+	else if( $operacio=="form_alta_pagina" )
+	{
+		
+		formularicrearnovapagina();
+	}
 	else if($operacio=="logout")
 	{
 		tancar_sessio();
@@ -86,11 +96,7 @@ if( isset($_REQUEST["operacio"]) && hiha_sessio() )
 	{
 		llistarnoticies();
 	}
-	else if( $operacio=="crearpagines")
-	{
-		crearpagines();
-	}
-
+	
 	else if( $operacio=="eliminar_noticia" && isset($_REQUEST["b_noti"]))
 	{
 		$b = $_REQUEST["b_noti"];
@@ -109,6 +115,20 @@ else if( isset($_REQUEST["operacio"]) && $_REQUEST["operacio"]=="login" && isset
 {
 	obrir_sessio( $_REQUEST["nick"], $_REQUEST["contrasenya"] );
 }
+else if($operacio=="op_alta_pagina" && isset($_REQUEST["nomfitxer"]) && isset($_REQUEST["head"]) && isset($_REQUEST["body"]) )
+	{ 	
+	
+		$nomfitxer = $_REQUEST["nomfitxer"];
+		$head = $_REQUEST["head"];
+		$body = $_REQUEST["body"];
+		
+		crearnovapagina($nomfitxer,$head,$body);
+	}
+	else if($operacio=="form_alta_pagina")
+	{ 	
+		
+		formularicrearnovapagina();
+		}
 else
 {
 	formularientradaportal();

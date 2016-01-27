@@ -145,7 +145,7 @@ function pintar_intranet()
         <ul>
         <li><a href="index.php?operacio=llistar_usuaris">Gesti&oacute; usuaris </a></li>
         <li><a href="index.php?operacio=llistar_noticies">Llistar noticies </a></li>
-		 <li><a href="index.php?operacio=crearpagines">Crear Pagines </a></li>
+		 <li><a href="index.php?operacio=llistar_pagines">Crear Pagines </a></li>
 <?php 
 	}
 	else if(es_moderador())
@@ -203,4 +203,19 @@ function formularicrearnouusuari()
 
 }
 
+function formularicrearnovapagina(){
+?>
+<h2> Creacio d'una nova pagina</h2>
+<form name="form2" method="POST" action="index.php">
+<table bgcolor="#C0D5BD" cellpadding="5" cellspacing="2" border="1">
+<tr><td> Nom del fitxer: </td><td><input name="nomfitxer" type="text"></td></tr>
+<tr><td> Head de la pagina:</td><td><input name="head" type="text"></td></tr>
+<tr><td> Body de la pagina</td><td><input name="body" type="text"></td></tr>
+<tr><td colspan="2" align="center"><input type="submit" value="Crear Pagina"></td></tr>
+</table>
+<input name="operacio" type="hidden" value="op_alta_pagina">
+</form>
+
+<?php
+}
 ?>
