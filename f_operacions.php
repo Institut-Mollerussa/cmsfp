@@ -369,13 +369,24 @@ function visualitzarpagina($head)
 		echo mysqli_error();
 		exit;
 	}
-	echo "<a href='index.php'>Tornar a l\'&agrave;rea principal</a><br><br>";
-	echo "<h2>PAGINA VISUALITACIO</h2>";
-	echo "<table width='70%' border='1'> <tr><td><b>Titol</b></td><td><b>Contigut</b></td><td></tr>";
+	
+	echo "<a href='index.php'>Tornar al principi</a><br><br>";
+	echo "<h1>PAGINA VISUALITACIO</h1>";
+	echo "<div  width: 500px;
+    height: 100px;
+    border: 3px solid blue;><p>Titol</p></div>";
 	while ( $row = $result->fetch_assoc() ){
-		echo "<tr><td>".htmlentities($row['head'])."</td><td>".htmlentities($row['body']);
+		echo "<p>".htmlentities($row['head'])."</p><pr><p>".htmlentities($row['body'])."</p>";
 	}
-	echo "</table>";
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	mysqli_free_result($result);
 	mysqli_close($mysqli);
 }
