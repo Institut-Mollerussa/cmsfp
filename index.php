@@ -82,6 +82,20 @@ if( isset($_REQUEST["operacio"]) && hiha_sessio() )
 		//llista en una taula els usuaris i ofereix les operacions pel CRUD
 		modificarperfilusuari( id_usuari(), $nomcognoms, $edat, $mail, $pwd);
 	}
+	else if( $operacio=="llistar_noticies")
+	{
+		llistarnoticies();
+	}
+	else if( $operacio=="crearpagines")
+	{
+		crearpagines();
+	}
+
+	else if( $operacio=="eliminar_noticia" && isset($_REQUEST["b_noti"]))
+	{
+		$b = $_REQUEST["b_noti"];
+		borrarnoticia($b);
+	}
 	else
 	{
 		echo "Operació no reconeguda";
