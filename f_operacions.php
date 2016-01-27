@@ -360,7 +360,25 @@ echo "<p><a href='index.php'>Tornar</a>";
 	}
 
 }
-
+function visualitzarpagina($head)
+{
+	$mysqli = new mysqli("localhost", "root", "", "portal");
+	$sql="select * from pagines where head='".$head."'";
+	if ( ! $result = $mysqli->query($sql) ) {
+		echo "No s'ha pogut realitzar la consulta";
+		echo mysqli_error();
+		exit;
+	}
+	echo "<a href='index.php'>Tornar a l\'&agrave;rea principal</a><br><br>";
+	echo "<h2>PAGINA VISUALITACIO</h2>";
+	echo "<table width='70%' border='1'> <tr><td><b>Titol</b></td><td><b>Contigut</b></td><td></tr>";
+	while ( $row = $result->fetch_assoc() ){
+		echo "<tr><td>".htmlentities($row['head'])."</td><td>".htmlentities($row['body']);
+	}
+	echo "</table>";
+	mysqli_free_result($result);
+	mysqli_close($mysqli);
+}
 
 
 
