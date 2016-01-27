@@ -145,7 +145,7 @@ function pintar_intranet()
         <ul>
         <li><a href="index.php?operacio=llistar_usuaris">Gesti&oacute; usuaris </a></li>
         <li><a href="index.php?operacio=llistar_noticies">Llistar noticies </a></li>
-		 <li><a href="index.php?operacio=llistar_pagines">Crear Pagines </a></li>
+		 <li><a href="index.php?operacio=llistar_pagines">Gestio Pagines del portal </a></li>
 <?php 
 	}
 	else if(es_moderador())
