@@ -314,13 +314,34 @@ function llistarpagines()
 		echo "<tr><td>";
 		echo htmlentities($row['head'])."<br></td>";
 		
-		//echo '<td><a href="index.php?operacio=op_visualitzar_pagina">Visualitzar pagina</a></td>'
-		echo '<td><a href="index.php?operacio=form_modificar_pagina&head='.$row["head"].'">Modificar pagina</a></td>';
-		echo '<td><a href="index.php?operacio=op_eliminar_pagina&head='.$row["head"].'">Eliminar la pagina</a></td></tr>';
+		echo '<td><a href="index.php?operacio=op_visualitzar_pagina='.$row["head"].'">Visualitzar pagina</a></td>';
+		
+		echo '<td><a href="index.php?operacio=form_modificar_pagina='.$row["head"].'">Modificar pagina</a></td>';
+		echo '<td><a href="index.php?operacio=op_eliminar_pagina='.$row["head"].'">Eliminar la pagina</a></td></tr>';
 	}
 	echo '</tr>';
 	echo '</table>';
 }
+function eliminarpagina($head)
+{
+	global $CFG;
+	$mysqli = new mysqli($CFG->dbhost,$CFG->dbuser,$CFG->dbpass,$CFG->dbname);
+	
+	$sql="delete from pagines where head='".$head."'" ;
+	if ( ! $result = $mysqli->query($sql) ) {
+		echo "No s'ha pogut realitzar l eliminacio";
+		echo mysqli_error();
+		exit;
+	}
+	else {
+		echo " La seguent pagina ha estat eliminada: ".$head;
+		echo "<p><a href='index.php?operacio=llistar_pagines'>Tornar</a>";
+	}
+	mysqli_close($mysqli);
+	    
+		
+}
+
 
 
 

@@ -84,6 +84,12 @@ if( isset($_REQUEST["operacio"]) && hiha_sessio() )
 		
 		formularicrearnovapagina();
 	}
+	else if( $operacio=="op_eliminar_pagina" && isset($_REQUEST["head"]) )
+	{
+		
+		$head = $_REQUEST["head"];
+		eliminarpagina($head);
+	}
 	else if($operacio=="logout")
 	{
 		tancar_sessio();
