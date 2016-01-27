@@ -5,7 +5,6 @@
 
 include "config.php";
 
-
 function connectar_bd()
 {
 	// implementar-ho a la funcio pare
@@ -362,7 +361,8 @@ echo "<p><a href='index.php'>Tornar</a>";
 }
 function visualitzarpagina($head)
 {
-	$mysqli = new mysqli("localhost", "root", "", "portal");
+	global $CFG;
+	$mysqli = new mysqli($CFG->dbhost,$CFG->dbuser,$CFG->dbpass,$CFG->dbname);
 	$sql="select * from pagines where head='".$head."'";
 	if ( ! $result = $mysqli->query($sql) ) {
 		echo "No s'ha pogut realitzar la consulta";
@@ -372,14 +372,33 @@ function visualitzarpagina($head)
 	
 	echo "<a href='index.php'>Tornar al principi</a><br><br>";
 	echo "<h1>PAGINA VISUALITACIO</h1>";
-	echo "<div  width: 500px;
-    height: 100px;
-    border: 3px solid blue;><p>Titol</p></div>";
-	while ( $row = $result->fetch_assoc() ){
-		echo "<p>".htmlentities($row['head'])."</p><pr><p>".htmlentities($row['body'])."</p>";
+	?>
+	<div  id="header" style="font-size:300%;">  <h1> 
+     
+   <?php
+   	while ( $row = $result->fetch_assoc() ){
+		echo "<p>".htmlentities($row['head'])."</p>";
+	
+   
+   
+	?>
+   
+	 </h1>
+    </div>
+	<div style="width:106%;
+height: 500px; border:solid 3px black; border-radius:20px;  background-color: #33FFFF ; font-size:200%;">
+	
+	
+	
+	<?php
+	echo "<p>".htmlentities($row['body'])."</p>";
+	
 	}
+	?>
+	</div>
+		
 	
-	
+		<?php
 	
 	
 	
