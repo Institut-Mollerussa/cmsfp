@@ -43,7 +43,7 @@ function tancar_sessio()
 function llistarusuaris()
 {
 	global $CFG;
-	$conn=mysqli_connect($CFG->dbhost,$CFG->dbname,$CFG->dbuser,$CFG->dbpass);
+	$conn=mysqli_connect($CFG->dbhost,$CFG->dbuser,$CFG->dbpass,$CFG->dbname);
 	$sql="
 	select * from usuaris;
 	";
@@ -74,9 +74,9 @@ function llistarusuaris()
 		echo htmlentities($row['edat'])."<br></td>";
 		echo "<td>";
 		echo htmlentities($row['nivell'])."<br></td>";
+		echo '<td><a href="index.php?operacio=form_modificar_usuari&nick='.$row["nick"].'">modificar</a></td>';
+		echo '<td><a href="index.php?operacio=op_eliminar_usuari&nick='.$row["nick"].'">eliminar</a></td>';
 	}
-	echo '<td><a href="index.php?operacio=form_modificar_usuari&nick=pepe">modificar</a></td>';	
-	echo '<td><a href="index.php?operacio=op_eliminar_usuari&nick=pepe">eliminar</a></td>';
 	echo '</tr>';
 	echo '</table>';
 }
