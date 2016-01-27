@@ -116,7 +116,7 @@ function formularimodificarusuari($nick) //Xavi
 						<tr><td> Nom i cognoms :</td> <td><input name="nomcognoms" type="text" value="'.$row["nomcognoms"].'"></td></tr>
 						<tr><td> Edat :</td> <td> <input name="edat" type="text" value="'.$row["edat"].'"></td></tr> 
 						<tr><td> Correu electr&oacute;nic :</td> <td> <input name="mail" type="text" value="'.$row["mail"].'"></td></tr> 
-						<tr><td> Usuari acc&eacute;s:</td><td>nick</td></tr> 
+						<tr><td> Usuari acc&eacute;s:</td><td>'.$row["nick"].'</td></tr> 
 						<tr><td> Contrasenya :</td> <td> <input name="contrasenya" type="password"></td></tr> 
 						<tr><td> Nivell :</td> <td> <input name="nivell" type="text" value="'.$row["nivell"].'"></td></tr> 
 						<tr><td colspan="2" align="center"><input type="submit" value="Modificar"></td></tr>
