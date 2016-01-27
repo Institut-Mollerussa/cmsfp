@@ -30,10 +30,9 @@ CREATE TABLE IF NOT EXISTS `usuaris` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 CREATE TABLE IF NOT EXISTS `pagines` (
-  `nomfitxer` varchar(30) COLLATE utf8_bin NOT NULL,
   `head` varchar(30) COLLATE utf8_bin NOT NULL,
   `body` varchar(200) COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`nomfitxer`)
+  PRIMARY KEY (`head`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
