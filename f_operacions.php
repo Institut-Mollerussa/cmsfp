@@ -158,7 +158,7 @@ function modificarusuari($nick, $nomcognoms, $edat, $mail, $pwd, $nivell) //Xavi
 function formulariperfilusuari($nick)
 {		
 	global $CFG;
-	if(id_usuari()!=null){
+	if(id_usuari()==$nick){
 	$mysqli = new mysqli($CFG->dbhost,$CFG->dbuser,$CFG->dbpass,$CFG->dbname);
 	$sql="SELECT * FROM usuaris WHERE nick='".$nick."'" ;
 	
