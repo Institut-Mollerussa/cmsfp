@@ -312,11 +312,11 @@ function llistarpagines()
 	
 	while ( $row = $result->fetch_assoc() ){
 		echo "<tr><td>";
-		echo htmlentities($row['head'])."<br></td></tr>";
+		echo htmlentities($row['head'])."<br></td>";
 		
 		
 		echo '<td><a href="index.php?operacio=form_modificar_pagina&head='.$row["head"].'">Modificar pagina</a></td>';
-		echo '<td><a href="index.php?operacio=op_eliminar_pagina&head='.$row["head"].'">Eliminar la pagina</a></td>';
+		echo '<td><a href="index.php?operacio=op_eliminar_pagina&head='.$row["head"].'">Eliminar la pagina</a></td></tr>';
 	}
 	echo '</tr>';
 	echo '</table>';
