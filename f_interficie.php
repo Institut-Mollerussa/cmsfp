@@ -209,7 +209,7 @@ function formularicrearnovapagina(){
 <form name="form2" method="POST" action="index.php">
 <table bgcolor="#C0D5BD" cellpadding="5" cellspacing="2" border="1">
 <tr><td> Head de la pagina:</td><td><input name="head" type="text"></td></tr>
-<tr><td><textarea name="body" rows="10" cols="40"></textarea> Body de la pagina</></td></tr>
+<tr><td colspan="2"><textarea name="body" rows="10" cols="40"></textarea> Body de la pagina</></td></tr>
 <tr><td colspan="2" align="center"><input type="submit" value="Crear Pagina"></td></tr>
 </table>
 <input name="operacio" type="hidden" value="op_alta_pagina">
@@ -226,7 +226,7 @@ function formularimodificarpagina($head){
 <table bgcolor="#C0D5BD" cellpadding="5" cellspacing="2" border="1">
 <input name="oldhead" type="hidden" value="<?php echo $head; ?>">
 <tr><td> Head de la pagina:</td><td><input name="head" type="text"></td></tr>
-<tr><td><textarea name="body" rows="10" cols="40"></textarea> Body de la pagina</></td></tr>
+<tr><td colspan="2"><textarea name="body" rows="10" cols="40"></textarea> Body de la pagina</></td></tr>
 <tr><td colspan="2" align="center"><input type="submit" value="Modificar Pagina"></td></tr>
 </table>
 <input name="operacio" type="hidden" value="op_modificar_pagina">
