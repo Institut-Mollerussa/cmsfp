@@ -61,14 +61,13 @@ if( isset($_REQUEST["operacio"]) && hiha_sessio() )
 		//llista en una taula els usuaris i ofereix les operacions pel CRUD
 		llistarusuaris();
 	}
-	else if($operacio=="op_alta_pagina" && isset($_REQUEST["nomfitxer"]) && isset($_REQUEST["head"]) && isset($_REQUEST["body"]) )
+	else if($operacio=="op_alta_pagina" && isset($_REQUEST["head"]) && isset($_REQUEST["body"]) )
 	{ 	
 	
-		$nomfitxer = $_REQUEST["nomfitxer"];
 		$head = $_REQUEST["head"];
 		$body = $_REQUEST["body"];
 		
-		crearnovapagina($nomfitxer,$head,$body);
+		crearnovapagina($head,$body);
 	}
 	else if($operacio=="form_alta_pagina")
 	{ 	

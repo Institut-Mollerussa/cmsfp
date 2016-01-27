@@ -274,20 +274,20 @@ function borrarnoticia($codin)
 	mysqli_free_result($result);
 	mysqli_close($mysqli);
 }
-function crearnovapagina($nomfitxer, $head, $body){
+function crearnovapagina($head, $body){
    
 	global $CFG;
 	$mysqli = new mysqli($CFG->dbhost,$CFG->dbuser,$CFG->dbpass,$CFG->dbname);
 	
-	$sql="insert into pagines (nomfitxer,head,body) values
-	('".$nomfitxer."', '".$head."', '".$body."')" ;
+	$sql="insert into pagines (head,body) values
+	('".$head."', '".$body."')" ;
 	if ( ! $result = $mysqli->query($sql) ) {
 		echo "No s'ha pogut realitzar la inserció";
 		echo mysqli_error();
 		exit;
 	}
 	else {
-		echo " Nova pagina creada: ".$nomfitxer;
+		echo " Nova pagina creada: ".$head;
 		echo "<p><a href='index.php?operacio=llistar_pagines'>Tornar</a>";
 	}
 	mysqli_close($mysqli);
@@ -296,7 +296,7 @@ function llistarpagines()
 {
 	global $CFG;
 	$conn=mysqli_connect($CFG->dbhost,$CFG->dbuser,$CFG->dbpass,$CFG->dbname);
-	$sql="select * from pagines;";
+	$sql="select head from pagines;";
 	if ( ! $result = $conn->query($sql) ) {
 	echo "No s'ha pogut realitzar la consulta";
 	echo mysqli_error();
@@ -308,20 +308,15 @@ function llistarpagines()
 	echo '<table bgcolor="#C0D5BD" cellspacing=5 border="1" width="100%">';
 	echo '<tr class="tlu">';
 	
-	echo "<tr><td><strong>Nom del fitxer</strong></td><td><strong>Head</strong></td><td><strong>Body</strong></td></tr>";
+	echo "<tr><td><strong>Nom de la pagina</strong></td></tr>";
 	
 	while ( $row = $result->fetch_assoc() ){
-		echo "<tr>";
-		echo "<td>";
-		echo htmlentities($row['nomfitxer'])."<br></td>";
-		echo "<td>";
-		echo htmlentities($row['head'])."<br></td>";
-		echo "<td>";
-		echo htmlentities($row['body'])."<br></td></tr>";
+		echo "<tr><td>";
+		echo htmlentities($row['head'])."<br></td></tr>";
 		
 		
-		echo '<td><a href="index.php?operacio=form_modificar_pagina&nomfitxer='.$row["nomfitxer"].'">Modificar pagina</a></td>';
-		echo '<td><a href="index.php?operacio=op_eliminar_pagina&nomfitxer='.$row["nomfitxer"].'">Eliminar la pagina</a></td>';
+		echo '<td><a href="index.php?operacio=form_modificar_pagina&head='.$row["head"].'">Modificar pagina</a></td>';
+		echo '<td><a href="index.php?operacio=op_eliminar_pagina&head='.$row["head"].'">Eliminar la pagina</a></td>';
 	}
 	echo '</tr>';
 	echo '</table>';
