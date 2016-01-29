@@ -108,7 +108,8 @@ function crearnouusuari($nick, $nomcognoms, $edat, $mail, $pwd, $nivell)
 
 function eliminarusuari($nick)
 {
-	connectar_bd();
+	global $CFG;
+	$conn=mysqli_connect($CFG->dbhost,$CFG->dbuser,$CFG->dbpass,$CFG->dbname);
 
 	
 	$sql="DELETE FROM usuaris WHERE nick='".$nick."'" ;
