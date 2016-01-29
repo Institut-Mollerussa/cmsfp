@@ -108,13 +108,14 @@ function crearnouusuari($nick, $nomcognoms, $edat, $mail, $pwd, $nivell)
 
 function eliminarusuari($nick)
 {
-	connectar_bd();
+	global $CFG;
+	$conn=mysqli_connect($CFG->dbhost,$CFG->dbuser,$CFG->dbpass,$CFG->dbname);
 
 	
 	$sql="DELETE FROM usuaris WHERE nick='".$nick."'" ;
 	
 	
-	if ( ! $resul=mysql_query($sql) ) {
+	if ( ! $resul=$conn->query($sql) ) {
 		echo " problemes al eliminar l'usuari.";
 		echo mysql_error();
 		exit;
@@ -122,7 +123,7 @@ function eliminarusuari($nick)
 	else
 	{
 		echo " Usuari ".$nick." eliminat.<br>";
-		echo "<a href='gestiousuaris.php'>Tornar</a>";
+		echo "<a href='index.php'>Tornar</a>";
 	}
 	
 	tancar_bd();
