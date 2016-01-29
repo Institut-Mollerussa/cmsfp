@@ -115,7 +115,7 @@ function eliminarusuari($nick)
 	$sql="DELETE FROM usuaris WHERE nick='".$nick."'" ;
 	
 	
-	if ( ! $resul=mysql_query($sql) ) {
+	if ( ! $resul=$conn->query($sql) ) {
 		echo " problemes al eliminar l'usuari.";
 		echo mysql_error();
 		exit;
