@@ -108,10 +108,26 @@ function crearnouusuari($nick, $nomcognoms, $edat, $mail, $pwd, $nivell)
 
 function eliminarusuari($nick)
 {
-	//afegir codi per eliminar usuaris
+	connectar_bd();
+
+	
+	$sql="DELETE FROM usuaris WHERE nick='".$nick."'" ;
+	
+	
+	if ( ! $resul=mysql_query($sql) ) {
+		echo " problemes al eliminar l'usuari.";
+		echo mysql_error();
+		exit;
+	}
+	else
+	{
 		echo " Usuari ".$nick." eliminat.<br>";
-		echo "<a href='index.php?operacio=llistar_usuaris'>Tornar</a>";
+		echo "<a href='gestiousuaris.php'>Tornar</a>";
+	}
+	
+	tancar_bd();
 }
+
 
 
 
