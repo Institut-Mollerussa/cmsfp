@@ -123,7 +123,7 @@ function eliminarusuari($nick)
 	else
 	{
 		echo " Usuari ".$nick." eliminat.<br>";
-		echo "<a href='gestiousuaris.php'>Tornar</a>";
+		echo "<a href='index.php'>Tornar</a>";
 	}
 	
 	tancar_bd();
