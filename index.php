@@ -114,11 +114,6 @@ if( isset($_REQUEST["operacio"]) && hiha_sessio() )
 	
 		modificarpagina($head,$body,$oldhead);
 	}
-	
-	
-	
-	
-	
 	else if($operacio=="logout")
 	{
 		tancar_sessio();
@@ -149,6 +144,21 @@ if( isset($_REQUEST["operacio"]) && hiha_sessio() )
 	{
 		$b = $_REQUEST["b_noti"];
 		borrarnoticia($b);
+	}
+	else if( $operacio=="form_modificar_noticia" && isset($_REQUEST["codin"]))
+	{
+		$cn = $_REQUEST["codin"];
+		formularimodificarnoticia($cn);
+	}
+	else if( $operacio=="op_modificar_noticia" &&  isset($_REQUEST["codin"]) && isset($_REQUEST["titol"]) && isset($_REQUEST["data"]) && isset($_REQUEST["descripcio"]) && isset($_REQUEST["tipus"]))
+	{
+		$codin = $_REQUEST["codin"];
+		$titol = $_REQUEST["titol"];
+		$data = $_REQUEST["data"];
+		$descripcio = $_REQUEST["descripcio"];
+		$tipus = $_REQUEST["tipus"];
+		
+		modificarnoticia( $titol, $data, $descripcio, $tipus, $codin);
 	}
 	else
 	{
