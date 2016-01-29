@@ -2,14 +2,17 @@
 // CMS FP
 // funcions amb elements d'interficie del portal
 
+
 function capsalera()
 {
-	capsalera_content("");
+	global $CFG;
+	$tema=($CFG->tema);
+	capsalera_content("", $tema);
 }
 
 
 
-function capsalera_content($content)
+function capsalera_content($content, $tem)
 {
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -20,7 +23,7 @@ function capsalera_content($content)
     <meta name="keywords" content="" />
     <meta name="description" content="" />
 	<?php echo $content; ?>
-    <link href="default.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="temes/<?php echo $tem; ?>/default.css" rel="stylesheet" type="text/css" media="screen" />
     </head>
     <body>
 
@@ -145,7 +148,7 @@ function pintar_intranet()
         <ul>
         <li><a href="index.php?operacio=llistar_usuaris">Gesti&oacute; usuaris </a></li>
         <li><a href="index.php?operacio=llistar_noticies">Llistar noticies </a></li>
-		 <li><a href="index.php?operacio=crearpagines">Crear Pagines </a></li>
+		<li><a href="index.php?operacio=crearpagines">Crear Pagines </a></li>
 <?php 
 	}
 	else if(es_moderador())

@@ -20,6 +20,7 @@
 		public $dbname="cmsfp";
 		public $dbuser="userDB";
 		public $dbpass="passwordDB";
+		public $tema="red";//red - default
 	}
 	
 	$CFG=new cCFG;

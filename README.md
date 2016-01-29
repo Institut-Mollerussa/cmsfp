@@ -7,4 +7,7 @@ CMS desenvolupat per alumnes de FP. Arquitectura funcional i disseny descendet.
 3-Fer una copia de sample.config.php com a config.php. Modificar-lo per que contingui les dades que corresponen amb el vostre sistema (URL, Nom de la BBDD, Usuari, Contrasenya).
 4-Enjoy CMS FP!
 
+(Opcional)
+5- Per canviar el tema de la web anar al fitxer config.php i canviar el valor de la variable tema per: "default" o "red" per aplicar el corresponent tema.
+
 
