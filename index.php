@@ -82,6 +82,22 @@ if( isset($_REQUEST["operacio"]) && hiha_sessio() )
 		//llista en una taula els usuaris i ofereix les operacions pel CRUD
 		modificarperfilusuari( id_usuari(), $nomcognoms, $edat, $mail, $pwd);
 	}
+	else if($operacio=="form_fitxerpp")
+	{
+		form_fitxerpp();
+	}
+	else if($operacio=="pujar_fitxerpp" && isset($_REQUEST["descripcio"]))
+	{
+		pujar_fitxerpp($_REQUEST["descripcio"], $_FILES);
+	}
+	else if($operacio=="llistar_fitxerpp")
+	{
+		llistar_fitxerpp();
+	}
+	else if($operacio=="eliminar_fitxerpp" && isset($_REQUEST["id"]))
+	{
+		eliminar_fitxerpp($_REQUEST["id"],$_REQUEST["nom"]);
+	}
 	else
 	{
 		echo "Operació no reconeguda";
