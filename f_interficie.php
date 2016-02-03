@@ -201,4 +201,32 @@ function formularicrearnouusuari()
 
 }
 
+function formularicrearnoticia(){
+
+?>
+	<h2>pintarformularinoticies</h2>
+
+	<form name="form1" method="POST" action="index.php">
+	
+	<table bgcolor="blue" cellpadding="5" cellspacing="2" border="1">
+	<tr><td> Titol :</td> <td><input name="titol" type="text"></td></tr>
+	<tr><td> Data :</td> <td> <input name="data" type="date"></td></tr> 
+	<tr><td> Descripcio :</td> <td> <input name="descripcio" type="text"></td></tr> 
+	<tr><td> Tipus :</td> <td>
+	  <select name="tipus">
+	
+	    <option value="publica" selected>publica</option>
+	    <option value="privada">privada</option>
+	 
+	    </select>
+		</td></tr> 
+	<tr><td colspan="2" align="center"><input type="submit" value="Crear"></td></tr>
+	</table>	
+	<input name="operacio" type="hidden" value="op_alta_noticia">	
+  </form>
+  
+<?php
+
+
+}
 ?>

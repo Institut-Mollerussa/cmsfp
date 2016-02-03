@@ -149,4 +149,27 @@ function modificarperfilusuari($nick, $nomcognoms, $edat, $mail, $pwd=0)
 	echo "<p><a href='index.php'>Tornar</a>";
 }
 
+function crearnoticia ($titol, $data, $descripcio, $tipus)
+{
+	$mysqli = new mysqli("localhost", "root", "", "portal");
+	$sql="insert into noticies (titol, data, descripcio, tipus) values
+	('".$titol."', '".$data."', '".$descripcio."', '".$tipus."')" ;
+
+	if ( ! $result = $mysqli->query($sql) ) {
+		echo "No s'ha pogut realitzar la inserció";
+		echo mysqli_error();
+		exit;
+	}
+	else {
+		echo "Nova noticia"."<br>";
+		echo "Titol: ".$titol."<br>";
+		echo "Data: ".$data."<br>";
+		echo "Descripcio: ".$descripcio."<br>";
+		echo "Tipus: ".$tipus."<br>";
+		echo "<p><a href='index.php?operacio=form_alta_noticia'>Tornar</a>";
+	}
+	mysqli_close($mysqli);
+
+}
+
 ?>
