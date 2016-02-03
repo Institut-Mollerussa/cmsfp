@@ -250,6 +250,15 @@ img.right {
 	color: #FFFFFF;
 }
 
+pagina {
+	 height: 100px;
+    width: 100px;
+        border=1;
+	
+}
+
+
+
 /* Footer */
 
 #footer {
@@ -273,3 +282,5 @@ TR.tlu{
 	border-bottom-style: solid;
 	border-bottom-width: thin;
 }
+
+

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // CMS FP
 // dispatcher per operacions
 
@@ -61,6 +61,59 @@ if( isset($_REQUEST["operacio"]) && hiha_sessio() )
 		//llista en una taula els usuaris i ofereix les operacions pel CRUD
 		llistarusuaris();
 	}
+	else if($operacio=="op_alta_pagina" && isset($_REQUEST["head"]) && isset($_REQUEST["body"]) )
+	{ 	
+	
+		$head = $_REQUEST["head"];
+		$body = $_REQUEST["body"];
+		
+		crearnovapagina($head,$body);
+	}
+	else if($operacio=="form_alta_pagina")
+		
+	{ 	
+		
+		formularicrearnovapagina();
+		}
+		
+	 else if($operacio=="op_visualitzar_pagina" && isset($_REQUEST["head"])){
+     
+	 $head=$_REQUEST["head"];
+	 
+	 visualitzarpagina($head);
+ }	
+ 
+	else if( $operacio=="llistar_pagines" )
+	{
+		
+		llistarpagines();
+	}
+	
+	else if( $operacio=="op_eliminar_pagina" && isset($_REQUEST["head"]) )
+	{
+		
+		$head = $_REQUEST["head"];
+		eliminarpagina($head);
+		
+	}
+	else if( $operacio=="form_modificar_pagina" &&  isset($_REQUEST["head"]) )
+	{
+		
+		$head = $_REQUEST["head"];
+		
+		
+	
+		formularimodificarpagina($head);
+	}
+	else if( $operacio=="op_modificar_pagina" &&  isset($_REQUEST["head"]) && isset($_REQUEST["body"] )  && isset($_REQUEST["oldhead"] ))
+	{
+		
+		$head = $_REQUEST["head"];
+		$body=$_REQUEST["body"];
+		$oldhead = $_REQUEST["oldhead"];
+	
+		modificarpagina($head,$body,$oldhead);
+	}
 	else if($operacio=="logout")
 	{
 		tancar_sessio();
@@ -82,20 +135,45 @@ if( isset($_REQUEST["operacio"]) && hiha_sessio() )
 		//llista en una taula els usuaris i ofereix les operacions pel CRUD
 		modificarperfilusuari( id_usuari(), $nomcognoms, $edat, $mail, $pwd);
 	}
+<<<<<<< HEAD
 	else if( $operacio=="op_alta_noticia")
 	{ 
 		
+=======
+	else if( $operacio=="llistar_noticies")
+	{
+		llistarnoticies();
+	}
+	
+	else if( $operacio=="eliminar_noticia" && isset($_REQUEST["b_noti"]))
+	{
+		$b = $_REQUEST["b_noti"];
+		borrarnoticia($b);
+	}
+	else if( $operacio=="form_modificar_noticia" && isset($_REQUEST["codin"]))
+	{
+		$cn = $_REQUEST["codin"];
+		formularimodificarnoticia($cn);
+	}
+	else if( $operacio=="op_modificar_noticia" &&  isset($_REQUEST["codin"]) && isset($_REQUEST["titol"]) && isset($_REQUEST["data"]) && isset($_REQUEST["descripcio"]) && isset($_REQUEST["tipus"]))
+	{
+		$codin = $_REQUEST["codin"];
+>>>>>>> 68add006c860c1449820c99098ff299c93b8a700
 		$titol = $_REQUEST["titol"];
 		$data = $_REQUEST["data"];
 		$descripcio = $_REQUEST["descripcio"];
 		$tipus = $_REQUEST["tipus"];
 		
+<<<<<<< HEAD
 		crearnoticia($titol, $data, $descripcio, $tipus);
 	}	
 	else if($operacio=="form_alta_noticia")
 	{ 	
 	
 		formularicrearnoticia();
+=======
+		modificarnoticia( $titol, $data, $descripcio, $tipus, $codin);
+>>>>>>> 68add006c860c1449820c99098ff299c93b8a700
 	}
 	else
 	{
