@@ -144,6 +144,8 @@ function pintar_intranet()
         <h2><strong>Administraci&oacute;</strong></h2>
         <ul>
         <li><a href="index.php?operacio=llistar_usuaris">Gesti&oacute; usuaris </a></li>
+        <li><a href="index.php?operacio=llistar_noticies">Llistar noticies </a></li>
+		 <li><a href="index.php?operacio=llistar_pagines">Gestio Pagines del portal </a></li>
 <?php 
 	}
 	else if(es_moderador())
@@ -201,4 +203,37 @@ function formularicrearnouusuari()
 
 }
 
+function formularicrearnovapagina(){
 ?>
+<h2> Creacio d'una nova pagina</h2>
+<form name="form2" method="POST" action="index.php">
+<table bgcolor="#C0D5BD" cellpadding="5" cellspacing="2" border="1">
+<tr><td> Head de la pagina:</td><td><input name="head" type="text"></td></tr>
+<tr><td> Body de la pagina:</td><td><textarea name="body" rows="10" cols="40"></textarea></td></tr>
+<tr><td colspan="2" align="center"><input type="submit" value="Crear Pagina"></td></tr>
+</table>
+<input name="operacio" type="hidden" value="op_alta_pagina">
+</form>
+
+<?php
+}
+
+function formularimodificarpagina($head){
+	
+?>
+<h2> Formulari modificar una pagina </h2>
+<form name="form3" method="POST" action="index.php">
+<table bgcolor="#C0D5BD" cellpadding="5" cellspacing="2" border="1">
+<input name="oldhead" type="hidden" value="<?php echo $head; ?>">
+<tr><td> Head de la pagina:</td><td><input name="head" type="text"></td></tr>
+<tr><td> Body de la pagina:</td><td><textarea name="body" rows="10" cols="40"></textarea></td></tr>
+<tr><td colspan="2" align="center"><input type="submit" value="Modificar Pagina"></td></tr>
+</table>
+<input name="operacio" type="hidden" value="op_modificar_pagina">
+</form>
+
+<?php
+}
+?>
+
+
