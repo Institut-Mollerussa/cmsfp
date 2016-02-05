@@ -203,8 +203,9 @@ function formularicrearnouusuari()
 
 }
 
-<<<<<<< HEAD
-function formularicrearnoticia(){
+
+function formularicrearnoticia()
+{
 
 ?>
 	<h2>pintarformularinoticies</h2>
@@ -230,11 +231,11 @@ function formularicrearnoticia(){
   
 <?php
 
-
 }
-=======
+
+
 function formularicrearnovapagina(){
->>>>>>> 68add006c860c1449820c99098ff299c93b8a700
+
 ?>
 <h2> Creacio d'una nova pagina</h2>
 <form name="form2" method="POST" action="index.php">

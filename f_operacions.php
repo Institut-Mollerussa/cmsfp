@@ -295,7 +295,6 @@ function borrarnoticia($codin)
 	mysqli_close($mysqli);
 }
 
-<<<<<<< HEAD
 function crearnoticia ($titol, $data, $descripcio, $tipus)
 {
 	$mysqli = new mysqli("localhost", "root", "", "portal");
@@ -304,9 +303,21 @@ function crearnoticia ($titol, $data, $descripcio, $tipus)
 
 	if ( ! $result = $mysqli->query($sql) ) {
 		echo "No s'ha pogut realitzar la inserció";
-=======
-function crearnovapagina($head, $body){
-   
+	}
+	else {
+		echo "Nova noticia"."<br>";
+		echo "Titol: ".$titol."<br>";
+		echo "Data: ".$data."<br>";
+		echo "Descripcio: ".$descripcio."<br>";
+		echo "Tipus: ".$tipus."<br>";
+		echo "<p><a href='index.php?operacio=form_alta_noticia'>Tornar</a>";
+	}
+	mysqli_close($mysqli);
+}
+
+
+function crearnovapagina($head, $body)
+{
 	global $CFG;
 	$mysqli = new mysqli($CFG->dbhost,$CFG->dbuser,$CFG->dbpass,$CFG->dbname);
 	
@@ -324,15 +335,16 @@ function crearnovapagina($head, $body){
 	mysqli_close($mysqli);
 }
 
+
 function llistarpagines()
 {
 	global $CFG;
 	$conn=mysqli_connect($CFG->dbhost,$CFG->dbuser,$CFG->dbpass,$CFG->dbname);
 	$sql="select head from pagines;";
 	if ( ! $result = $conn->query($sql) ) {
-	echo "No s'ha pogut realitzar la consulta";
-	echo mysqli_error();
-	exit;
+		echo "No s'ha pogut realitzar la consulta";
+		echo mysqli_error();
+		exit;
 	}
 	
     echo '<a href="index.php?operacio=form_alta_pagina">Afegeix una pagina</a> | <a href="index.php">Tornar a l\'&agrave;rea principal</a><br><br>';
@@ -354,6 +366,7 @@ function llistarpagines()
 	echo '</tr>';
 	echo '</table>';
 }
+
 function eliminarpagina($head)
 {
 	global $CFG;
@@ -362,31 +375,15 @@ function eliminarpagina($head)
 	$sql="delete from pagines where head like '".$head."'" ;
 	if ( ! $result = $mysqli->query($sql) ) {
 		echo "No s'ha pogut realitzar l eliminacio";
->>>>>>> 68add006c860c1449820c99098ff299c93b8a700
 		echo mysqli_error();
 		exit;
 	}
-	else {
-<<<<<<< HEAD
-		echo "Nova noticia"."<br>";
-		echo "Titol: ".$titol."<br>";
-		echo "Data: ".$data."<br>";
-		echo "Descripcio: ".$descripcio."<br>";
-		echo "Tipus: ".$tipus."<br>";
-		echo "<p><a href='index.php?operacio=form_alta_noticia'>Tornar</a>";
-	}
+	echo " La seguent pagina ha estat eliminada: ".$head;
+	echo "<a href='index.php'>Tornar inici</a>&nbsp&nbsp";
+	echo "<a href='index.php?operacio=llistar_pagines'>Enrera</a>";
 	mysqli_close($mysqli);
+}
 
-}
-=======
-		echo " La seguent pagina ha estat eliminada: ".$head;
-		echo "<a href='index.php'>Tornar inici</a>&nbsp&nbsp";
-		echo "<a href='index.php?operacio=llistar_pagines'>Enrera</a>";
-	}
-	mysqli_close($mysqli);
-	    
-		
-}
 function modificarpagina($head,$body,$oldhead)
 {
 	global $CFG;
@@ -481,18 +478,17 @@ function modificarnoticia ($titol, $data, $descripcio, $tipus, $codin)
 
 function formularimodificarnoticia ($codin)
 {
+	global $CFG;
+    $mysqli = new mysqli($CFG->dbhost,$CFG->dbuser,$CFG->dbpass,$CFG->dbname);
 	
-		global $CFG;
-	    $mysqli = new mysqli($CFG->dbhost,$CFG->dbuser,$CFG->dbpass,$CFG->dbname);
+	$sql="SELECT * FROM noticies WHERE codin='".$codin."'";
 		
-		$sql="SELECT * FROM noticies WHERE codin='".$codin."'";
-		
-		if ( ! $result = $mysqli->query($sql) ) {
+	if ( ! $result = $mysqli->query($sql) ) {
 		echo "No s'ha pogut realitzar la consulta";
 		echo mysqli_error();
 		exit;
-}
-else{
+	}
+	else{
 		if ($row = $result->fetch_assoc()){
 			echo '<h2>Modificar noticia</h2>
 					<form name="formulari" method="POST" action="index.php?operacio=op_modificar_noticia">	
@@ -508,18 +504,14 @@ else{
 								</select>
 						<input name="codin" type="hidden" value="'.$row['codin'].'"> 
 						<input type="submit">Modificar</input>
-					</form>';
-				
+					</form>';			
 		}
 		else{
 			echo "No existeix la noticia:" .$codin. ".";
 		}
 		
+	}
 }
-}
 
-
-
->>>>>>> 68add006c860c1449820c99098ff299c93b8a700
 
 ?>
