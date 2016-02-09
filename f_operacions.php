@@ -272,7 +272,9 @@ echo "<p><a href='index.php'>Tornar</a>";
 
 function llistarnoticies()
 {
-	$mysqli = new mysqli("localhost", "root", "root", "portal");
+	global $CFG;
+	$mysqli = new mysqli($CFG->dbhost,$CFG->dbuser,$CFG->dbpass,$CFG->dbname);
+	
 	$sql="select * from noticies";
 	if ( ! $result = $mysqli->query($sql) ) {
 		echo "No s'ha pogut realitzar la consulta";
@@ -293,7 +295,9 @@ function llistarnoticies()
 
 function borrarnoticia($codin)
 {
-	$mysqli = new mysqli("localhost", "root", "root", "portal");
+	global $CFG;
+	$mysqli = new mysqli($CFG->dbhost,$CFG->dbuser,$CFG->dbpass,$CFG->dbname);
+	
 	$sql="DELETE FROM noticies WHERE codin='".$codin."'" ;
 	if ( ! $result = $mysqli->query($sql) ) {
 		echo "No s'ha pogut eliminar la noticia.";
@@ -308,8 +312,30 @@ function borrarnoticia($codin)
 	mysqli_free_result($result);
 	mysqli_close($mysqli);
 }
-function crearnovapagina($head, $body){
-   
+
+function crearnoticia ($titol, $data, $descripcio, $tipus)
+{
+	$mysqli = new mysqli("localhost", "root", "", "portal");
+	$sql="insert into noticies (titol, data, descripcio, tipus) values
+	('".$titol."', '".$data."', '".$descripcio."', '".$tipus."')" ;
+
+	if ( ! $result = $mysqli->query($sql) ) {
+		echo "No s'ha pogut realitzar la inserció";
+	}
+	else {
+		echo "Nova noticia"."<br>";
+		echo "Titol: ".$titol."<br>";
+		echo "Data: ".$data."<br>";
+		echo "Descripcio: ".$descripcio."<br>";
+		echo "Tipus: ".$tipus."<br>";
+		echo "<p><a href='index.php?operacio=form_alta_noticia'>Tornar</a>";
+	}
+	mysqli_close($mysqli);
+}
+
+
+function crearnovapagina($head, $body)
+{
 	global $CFG;
 	$mysqli = new mysqli($CFG->dbhost,$CFG->dbuser,$CFG->dbpass,$CFG->dbname);
 	
@@ -326,15 +352,17 @@ function crearnovapagina($head, $body){
 	}
 	mysqli_close($mysqli);
 }
+
+
 function llistarpagines()
 {
 	global $CFG;
 	$conn=mysqli_connect($CFG->dbhost,$CFG->dbuser,$CFG->dbpass,$CFG->dbname);
 	$sql="select head from pagines;";
 	if ( ! $result = $conn->query($sql) ) {
-	echo "No s'ha pogut realitzar la consulta";
-	echo mysqli_error();
-	exit;
+		echo "No s'ha pogut realitzar la consulta";
+		echo mysqli_error();
+		exit;
 	}
 	
     echo '<a href="index.php?operacio=form_alta_pagina">Afegeix una pagina</a> | <a href="index.php">Tornar a l\'&agrave;rea principal</a><br><br>';
@@ -356,6 +384,7 @@ function llistarpagines()
 	echo '</tr>';
 	echo '</table>';
 }
+
 function eliminarpagina($head)
 {
 	global $CFG;
@@ -367,15 +396,12 @@ function eliminarpagina($head)
 		echo mysqli_error();
 		exit;
 	}
-	else {
-		echo " La seguent pagina ha estat eliminada: ".$head;
-		echo "<a href='index.php'>Tornar inici</a>&nbsp&nbsp";
-		echo "<a href='index.php?operacio=llistar_pagines'>Enrera</a>";
-	}
+	echo " La seguent pagina ha estat eliminada: ".$head;
+	echo "<a href='index.php'>Tornar inici</a>&nbsp&nbsp";
+	echo "<a href='index.php?operacio=llistar_pagines'>Enrera</a>";
 	mysqli_close($mysqli);
-	    
-		
 }
+
 function modificarpagina($head,$body,$oldhead)
 {
 	global $CFG;
@@ -448,8 +474,62 @@ height: 500px; border:solid 3px black; border-radius:20px;  background-color: #3
 	mysqli_close($mysqli);
 }
 
+function modificarnoticia ($titol, $data, $descripcio, $tipus, $codin)
+{
+
+	global $CFG;
+
+	$mysqli = new mysqli($CFG->dbhost,$CFG->dbuser,$CFG->dbpass,$CFG->dbname);
+	
+	$sql="UPDATE noticies SET titol='".$titol."', data='".$data."', descripcio='".$descripcio."', tipus='".$tipus."', codin='".$codin."' where codin='".$codin."'";
+	
+	if ( ! $result = $mysqli->query($sql) ) {
+		echo "No s'ha pogut realitzar l'actualitzaciÃ³";
+		echo mysqli_error();
+		exit;
+	}
+	else{
+		echo " La noticia amb el codi ".$codin." sha modificat correctment";
+}
+}
 
 
+function formularimodificarnoticia ($codin)
+{
+	global $CFG;
+    $mysqli = new mysqli($CFG->dbhost,$CFG->dbuser,$CFG->dbpass,$CFG->dbname);
+	
+	$sql="SELECT * FROM noticies WHERE codin='".$codin."'";
+		
+	if ( ! $result = $mysqli->query($sql) ) {
+		echo "No s'ha pogut realitzar la consulta";
+		echo mysqli_error();
+		exit;
+	}
+	else{
+		if ($row = $result->fetch_assoc()){
+			echo '<h2>Modificar noticia</h2>
+					<form name="formulari" method="POST" action="index.php?operacio=op_modificar_noticia">	
+						Titol: <input type="text" name="titol" value="'.$row['titol'].'"><br>
+						Data: <input type="text" name="data" value="'.$row['data'].'"><br>
+						Descripcio: <textarea name="descripcio" rows="6" cols="90" value="'.$row['descripcio'].'"> </textarea><br>
+						Tipus : <select name="tipus" value="'.$row['tipus'].'">
+							<option value="Esports">Esports</option>
+							<option value="Economia">Economia</option>
+							<option value="Politica">Politica</option>
+							<option value="Societat">Societat</option>
+							<option value="Cultura">cultura</option>
+								</select>
+						<input name="codin" type="hidden" value="'.$row['codin'].'"> 
+						<input type="submit">Modificar</input>
+					</form>';			
+		}
+		else{
+			echo "No existeix la noticia:" .$codin. ".";
+		}
+		
+	}
+}
 
 
 ?>
