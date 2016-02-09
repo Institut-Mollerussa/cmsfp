@@ -19,12 +19,30 @@ function tancar_bd()
 
 
 function obrir_sessio($nick, $pwd)
-{
-		//afegir codi per obrir la sessio
-		assigna_id("admin");
-		assigna_permisos(10);
-		echo '<h3>Login ...</h3>';
-		echo '<META HTTP-EQUIV="REFRESH" CONTENT="2;URL=index.php">';
+{ 
+	$nick = $_REQUEST["nick"];
+	$pwd = $_REQUEST["contrasenya"];
+	
+	$conn=mysqli_connect($CFG->dbhost,$CFG->dbuser,$CFG->dbpass,$CFG->dbname);
+	
+	$sql="select * from usuaris where nick='".$nick."' and contrasenya='".$pwd."'" ;
+	
+	if ( ! $resul=$conn->query($sql) ) {
+		echo "Error al connectar amb la base de dades";
+		echo mysql_error();
+		exit;
+	}
+
+	if ($arr_resul= mysql_fetch_array($resul)){
+		assigna_id($arr_resul['nick']);
+		assigna_permisos($arr_resul['nivell']);
+	}	
+	else{
+		echo '<h3>Error al logar</h3>';
+	}
+	
+	
+	mysqli_close($mysqli);
 }
 
 
