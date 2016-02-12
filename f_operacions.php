@@ -22,27 +22,29 @@ function obrir_sessio($nick, $pwd)
 { 
 	$nick = $_REQUEST["nick"];
 	$pwd = $_REQUEST["contrasenya"];
-	
+	global $CFG;
 	$conn=mysqli_connect($CFG->dbhost,$CFG->dbuser,$CFG->dbpass,$CFG->dbname);
 	
 	$sql="select * from usuaris where nick='".$nick."' and contrasenya='".$pwd."'" ;
 	
 	if ( ! $resul=$conn->query($sql) ) {
 		echo "Error al connectar amb la base de dades";
-		echo mysql_error();
+		echo mysqli_error();
 		exit;
 	}
 
-	if ($arr_resul= mysql_fetch_array($resul)){
+	if ($arr_resul= mysqli_fetch_array($resul)){
 		assigna_id($arr_resul['nick']);
 		assigna_permisos($arr_resul['nivell']);
+		echo "<p><a href='index.php'>Tornar</a>";
 	}	
 	else{
 		echo '<h3>Error al logar</h3>';
+		echo "<p><a href='index.php'>Tornar</a>";
 	}
 	
 	
-	mysqli_close($mysqli);
+	mysqli_close($conn);
 }
 
 
