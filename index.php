@@ -161,7 +161,6 @@ if( isset($_REQUEST["operacio"]) && hiha_sessio() )
 	}	
 	else if( $operacio=="op_alta_noticia")
 	{ 
-		$codin = $_REQUEST["codin"];
 		$titol = $_REQUEST["titol"];
 		$data = $_REQUEST["data"];
 		$descripcio = $_REQUEST["descripcio"];

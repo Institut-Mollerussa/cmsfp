@@ -283,12 +283,12 @@ function llistarnoticies()
 		echo mysqli_error();
 		exit;
 	}
-	echo "<a href='index.php'>Tornar a l\'&agrave;rea principal</a><br><br>";
+	echo '<a href="index.php?operacio=form_alta_noticia">Afegir noticia</a> | <a href="index.php">Tornar a l\'&agrave;rea principal</a><br><br>';
 	echo "<h2>Llistat de noticies</h2>";
-	echo "<table width='70%' border='1'> <tr><td><b>Titol</b></td><td><b>Data</b></td><td><b>Tipus</b></td><td><b>Eliminar</b></td></tr>";
+	echo "<table width='70%' border='1'> <tr><td><b>Titol</b></td><td><b>Data</b></td><td><b>Tipus</b></td><td><b></b></td></tr>";
 	while ( $row = $result->fetch_assoc() ){
 		echo "<tr><td>".htmlentities($row['titol'])."</td><td>".htmlentities($row['data'])."</td><td>".htmlentities($row['tipus'])."</td>";
-        echo "<td><a href='index.php?operacio=eliminar_noticia&b_noti=".htmlentities($row['codin'])."'>Eliminar</a></td></tr>";
+        echo "<td><a href='index.php?operacio=form_modificar_noticia&codin=".htmlentities($row['codin'])."'>Modificar</a> <a href='index.php?operacio=eliminar_noticia&b_noti=".htmlentities($row['codin'])."'>Eliminar</a></td></tr>";
 	}
 	echo "</table>";
 	mysqli_free_result($result);
@@ -317,7 +317,9 @@ function borrarnoticia($codin)
 
 function crearnoticia ($titol, $data, $descripcio, $tipus)
 {
-	$mysqli = new mysqli("localhost", "root", "", "portal");
+	global $CFG;
+	$mysqli = new mysqli($CFG->dbhost,$CFG->dbuser,$CFG->dbpass,$CFG->dbname);
+	
 	$sql="insert into noticies (titol, data, descripcio, tipus) values
 	('".$titol."', '".$data."', '".$descripcio."', '".$tipus."')" ;
 
@@ -330,7 +332,7 @@ function crearnoticia ($titol, $data, $descripcio, $tipus)
 		echo "Data: ".$data."<br>";
 		echo "Descripcio: ".$descripcio."<br>";
 		echo "Tipus: ".$tipus."<br>";
-		echo "<p><a href='index.php?operacio=form_alta_noticia'>Tornar</a>";
+		header('Location: index.php?operacio=llistar_noticies');
 	}
 	mysqli_close($mysqli);
 }
@@ -444,41 +446,29 @@ function visualitzarpagina($head)
    <?php
    	while ( $row = $result->fetch_assoc() ){
 		echo "<p>".htmlentities($row['head'])."</p>";
-	
-   
-   
 	?>
    
 	 </h1>
     </div>
 	<div style="width:106%;
 height: 500px; border:solid 3px black; border-radius:20px;  background-color: #33FFFF ; font-size:200%;">
-	
-	
-	
+
 	<?php
 	echo "<p>".htmlentities($row['body'])."</p>";
 	
 	}
 	?>
+    
 	</div>
-		
-	
-		<?php
-	
-	
-	
-	
-	
-	
-	
+    	
+	<?php
+
 	mysqli_free_result($result);
 	mysqli_close($mysqli);
 }
 
 function modificarnoticia ($titol, $data, $descripcio, $tipus, $codin)
 {
-
 	global $CFG;
 
 	$mysqli = new mysqli($CFG->dbhost,$CFG->dbuser,$CFG->dbpass,$CFG->dbname);
@@ -491,8 +481,9 @@ function modificarnoticia ($titol, $data, $descripcio, $tipus, $codin)
 		exit;
 	}
 	else{
-		echo " La noticia amb el codi ".$codin." sha modificat correctment";
-}
+		echo " La noticia amb el codi ".$codin." sha modificat correctment. <br>";
+		echo "<a href='index.php'>Tornar inici</a>&nbsp&nbsp";
+	}
 }
 
 
@@ -511,20 +502,19 @@ function formularimodificarnoticia ($codin)
 	else{
 		if ($row = $result->fetch_assoc()){
 			echo '<h2>Modificar noticia</h2>
+					<table bgcolor="#C0D5BD" ><tr><td>
 					<form name="formulari" method="POST" action="index.php?operacio=op_modificar_noticia">	
 						Titol: <input type="text" name="titol" value="'.$row['titol'].'"><br>
 						Data: <input type="text" name="data" value="'.$row['data'].'"><br>
-						Descripcio: <textarea name="descripcio" rows="6" cols="90" value="'.$row['descripcio'].'"> </textarea><br>
+						Descripcio: <textarea name="descripcio" rows="6" cols="90">'.$row['descripcio'].'</textarea><br>
 						Tipus : <select name="tipus" value="'.$row['tipus'].'">
-							<option value="Esports">Esports</option>
-							<option value="Economia">Economia</option>
-							<option value="Politica">Politica</option>
-							<option value="Societat">Societat</option>
-							<option value="Cultura">cultura</option>
-								</select>
+							<option value="publica">publica</option>
+							<option value="privada">privada</option>
+							</select>
 						<input name="codin" type="hidden" value="'.$row['codin'].'"> 
-						<input type="submit">Modificar</input>
-					</form>';			
+						<input type="submit" value="Modificar"></input>
+					</form>
+					</td></tr></table>';			
 		}
 		else{
 			echo "No existeix la noticia:" .$codin. ".";
