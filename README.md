@@ -17,5 +17,5 @@ CMS desenvolupat per alumnes de FP. Arquitectura funcional i disseny descendet.
 ```
 Enjoy CMS FP!
 ```
-[Crear Mastering Markdown d'un projecte, arxiu MD] (https://guides.github.com/features/mastering-markdown/)
+[Crear Mastering Markdown d'un projecte, arxiu MD](https://guides.github.com/features/mastering-markdown/)
 
